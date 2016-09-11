@@ -8,20 +8,16 @@ See the [Mapnik guide](https://github.com/mapnik/mapnik/blob/master/docs/contrib
 
 ## Documentation
 
-Node Mapnik is documented with [JSDoc](http://usejsdoc.org/) comments embedded
-in the C++ code and formatted into HTML with [documentationjs](http://documentation.js.org/). You can install DocumentationJS via `npm install -g documentation`.
+Please update the inline documentation when adding/editing functionality. All documentation is generated dynamically with [documentationjs](http://documentation.js.org/). Node Mapnik docs are located at mapnik.org/documentation/node-mapnik/.
 
-API Documentation is versioned down to the **minor** patch, like `3.5`. Each version has its own directory within `/documentation`. Patch updates of Node Mapnik should overwrite current API docs. Any new minor releases should generate a new directory.
+All documentation is updated on a daily basis if there have been changes to the `master` branch. To view your documentation changes locally:
 
-To update the [hosted documentation](http://mapnik.org/node-mapnik/documentation/):
+```bash
+npm run docs
+python -m SimpleHTTPServer # localhost:8000/documentation/<version>
+```
 
-* Clone the Node Mapnik Theme repository `git clone git@github.com:mapnik/node-mapnik-theme.git`
-* Make changes to JSDoc comments
-* Regenerate/generate documentation depending on if you are updating a minor patch or creating a new one: `documentation build src/*.cpp --polyglot -f html -o documentation/<version>/ --github --name "Node Mapnik <version>" -t /path/to/node-mapnik-theme -c documentation/config.json`. This should be done on your own branch.
-* Merge changes into `master`
-* Switch to the `gh-pages` branch: `git checkout gh-pages`
-* merge changes from `master` into `gh-pages`
-* commit those changes and push to Github
+*Note: since mapnik.org has a specific theme for documentationjs, it will look different than viewing locally.*
 
 ## Testing
 
@@ -114,7 +110,7 @@ An official release requires:
 
  - Updating the CHANGELOG.md
  - Publishing new binaries for a non-alpha version like `3.1.5`. So you'd want to merge your branch and then edit the `version` value in package json back to a decent value for release.
- - Create a github tag like `git tag --annotate 3.1.5 -m "v3.1.5"`
+ - Create a github tag like `git tag --annotate v3.1.5 -m "v3.1.5"`
  - Push new tags `git push --tags`
  - Optional: Test mapnik-swoop again for your new tagged version
  - Ensure you have a clean checkout (no extra files in your check that are not known by git). You need to be careful, for instance, to avoid a large accidental file being packaged by npm. You can get a view of what npm will publish by running `make testpack`
